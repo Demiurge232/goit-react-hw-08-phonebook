@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { FilterLabel, FilterInput } from './Filter.styled';
-import { findContact } from 'redux/filterSlice';
+import { findContact } from 'redux/contacts/filterSlice';
+import { Input, FormLabel } from '@chakra-ui/react';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -10,10 +10,13 @@ const Filter = () => {
   };
 
   return (
-    <FilterLabel htmlFor="">
-      Find contacts by name
-      <FilterInput type="text" onChange={handleChange} />
-    </FilterLabel>
+    <FormLabel>
+      <Input
+        type="text"
+        onChange={handleChange}
+        placeholder="Find contacts by name"
+      />
+    </FormLabel>
   );
 };
 

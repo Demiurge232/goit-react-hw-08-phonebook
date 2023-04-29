@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { ContactItemLi, ContactItemButton } from './ContactItem.styled';
-import { deleteContact } from 'redux/operations';
+import { deleteContact } from 'redux/contacts/operations';
+import { Button, ListItem, Text } from '@chakra-ui/react';
 
 const ContactItem = ({ name, number, id }) => {
   const dispatch = useDispatch();
@@ -10,14 +10,22 @@ const ContactItem = ({ name, number, id }) => {
     dispatch(deleteContact(id));
   };
   return (
-    <ContactItemLi>
-      <span>
+    <ListItem>
+      <Text>
         {name}: {number}
-      </span>
-      <ContactItemButton type="button" onClick={handeleDelete}>
+      </Text>
+      <Button
+        type="button"
+        onClick={handeleDelete}
+        colorScheme="green"
+        size="md"
+        marginTop="15px"
+        marginRight="auto"
+        marginLeft="auto"
+      >
         Delete
-      </ContactItemButton>
-    </ContactItemLi>
+      </Button>
+    </ListItem>
   );
 };
 export default ContactItem;

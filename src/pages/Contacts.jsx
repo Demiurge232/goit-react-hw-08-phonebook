@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux';
-import { selectError, selectIsLoading } from 'redux/selectors';
-import { ThreeDots } from 'react-loader-spinner';
+import { selectError, selectIsLoading } from 'redux/contacts/selectors';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Filter from '../components/Filter/Filter';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ContactList from '../components/ContactList/ContactList';
+import Loader from 'components/Loader/Loader';
+import { Heading } from '@chakra-ui/react';
 
 export const Contacts = () => {
   const isLoading = useSelector(selectIsLoading);
@@ -13,22 +14,11 @@ export const Contacts = () => {
 
   return (
     <div>
-      <h1>Phonebook</h1>
+      <Heading>Phonebook</Heading>
       <ContactForm />
-      <h2>Contacts</h2>
+      <Heading>Contacts</Heading>
       <Filter />
-      {isLoading && !error && (
-        <ThreeDots
-          height="80"
-          width="80"
-          radius="9"
-          color="#4fa94d"
-          ariaLabel="three-dots-loading"
-          wrapperStyle={{}}
-          wrapperClassName=""
-          visible={true}
-        />
-      )}
+      {isLoading && !error && <Loader />}
       <ContactList />
       <ToastContainer />
     </div>

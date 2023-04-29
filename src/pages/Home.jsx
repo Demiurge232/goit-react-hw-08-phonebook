@@ -1,4 +1,6 @@
+import HomeFilling from 'components/HomeFilling/HomeFilling';
+
 export const Home = () => {
-  return <h1>Welcome!!</h1>;
+  return <HomeFilling />;
 };
 export default Home;

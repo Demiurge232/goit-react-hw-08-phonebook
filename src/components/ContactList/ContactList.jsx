@@ -1,9 +1,9 @@
 import ContactItem from 'components/ContactItem/ContactItem';
-import { ContactListUl } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFindContact } from 'redux/selectors';
+import { selectFindContact } from 'redux/contacts/selectors';
 import { useEffect } from 'react';
-import { fetchContacts } from 'redux/operations';
+import { fetchContacts } from 'redux/contacts/operations';
+import { List } from '@chakra-ui/react';
 
 export const ContactList = () => {
   const items = useSelector(selectFindContact);
@@ -14,11 +14,11 @@ export const ContactList = () => {
   }, [dispatch]);
 
   return (
-    <ContactListUl>
+    <List display="flex" flexWrap="wrap" gap="40px">
       {items.map(({ name, id, number }) => (
-        <ContactItem name={name} key={id} id={id} phone={number} />
+        <ContactItem name={name} key={id} id={id} number={number} />
       ))}
-    </ContactListUl>
+    </List>
   );
 };
 

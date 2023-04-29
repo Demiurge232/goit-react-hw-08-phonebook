@@ -1,12 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  PhonebookForm,
-  PhonebookButton,
-  PhonebookInput,
-} from './ContactForm.styled';
 import { toast } from 'react-toastify';
-import { addContact } from 'redux/operations';
-import { selectItems } from 'redux/selectors';
+import { addContact } from 'redux/contacts/operations';
+import { selectItems } from 'redux/contacts/selectors';
+import { Input, FormControl, FormLabel, Button } from '@chakra-ui/react';
 
 export default function ContactForm() {
   const dispatch = useDispatch();
@@ -40,24 +36,39 @@ export default function ContactForm() {
   };
 
   return (
-    <PhonebookForm onSubmit={handleSubmit}>
-      <label>Name</label>
-      <PhonebookInput
+    <FormControl
+      as="form"
+      onSubmit={handleSubmit}
+      w="500px"
+      display="flex"
+      flexDirection="column"
+    >
+      <FormLabel>Name</FormLabel>
+      <Input
         type="text"
         name="name"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
       />
-      <label>Number</label>
-      <PhonebookInput
+      <FormLabel>Number</FormLabel>
+      <Input
         type="tel"
         name="number"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
       />
-      <PhonebookButton type="submit">Add contact</PhonebookButton>
-    </PhonebookForm>
+      <Button
+        type="submit"
+        colorScheme="green"
+        size="md"
+        marginTop="15px"
+        marginRight="auto"
+        marginLeft="auto"
+      >
+        Add contact
+      </Button>
+    </FormControl>
   );
 }

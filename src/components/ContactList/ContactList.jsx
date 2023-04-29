@@ -15,8 +15,8 @@ export const ContactList = () => {
 
   return (
     <ContactListUl>
-      {items.map(({ name, id, phone }) => (
-        <ContactItem name={name} key={id} id={id} phone={phone} />
+      {items.map(({ name, id, number }) => (
+        <ContactItem name={name} key={id} id={id} phone={number} />
       ))}
     </ContactListUl>
   );

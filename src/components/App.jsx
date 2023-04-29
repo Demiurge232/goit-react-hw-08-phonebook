@@ -1,35 +1,35 @@
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Filter from './Filter/Filter';
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactList/ContactList';
-import { useSelector } from 'react-redux';
-import { selectError, selectIsLoading } from 'redux/selectors';
-import { ThreeDots } from 'react-loader-spinner';
+import { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import AppHeader from './AppHeader/AppHeader';
+import { useDispatch } from 'react-redux';
+import { fetchCurrentUser } from 'redux/auth/auth-operatations';
+import Home from 'pages/Home';
+import Login from 'pages/Login';
+import Register from 'pages/Register';
+import Contacts from 'pages/Contacts';
+// const Home = lazy(() => import('../pages/Home'));
+// const Login = lazy(() => import('../pages/Login'));
+// const Register = lazy(() => import('../pages/Register'));
+// const Contacts = lazy(() => import('../pages/Contacts'));
 
 export default function App() {
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
+
   return (
     <div>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      <Filter />
-      {isLoading && !error && (
-        <ThreeDots
-          height="80"
-          width="80"
-          radius="9"
-          color="#4fa94d"
-          ariaLabel="three-dots-loading"
-          wrapperStyle={{}}
-          wrapperClassName=""
-          visible={true}
-        />
-      )}
-      <ContactList />
-      <ToastContainer />
+      <AppHeader />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="*" element={<Home />} />
+      </Routes>
     </div>
   );
 }

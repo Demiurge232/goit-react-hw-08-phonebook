@@ -14,7 +14,7 @@ export default function ContactForm() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const { name, phone } = event.target.elements;
+    const { name, number } = event.target.elements;
 
     if (items.find(contact => contact.name === name.value)) {
       toast.error(`${name.value} is already in contacts`, {
@@ -26,7 +26,7 @@ export default function ContactForm() {
 
     const contactData = {
       name: name.value,
-      phone: phone.value,
+      number: number.value,
     };
 
     dispatch(addContact(contactData));
@@ -34,9 +34,9 @@ export default function ContactForm() {
   };
 
   const reset = event => {
-    const { name, phone } = event.target.elements;
+    const { name, number } = event.target.elements;
     name.value = '';
-    phone.value = '';
+    number.value = '';
   };
 
   return (
@@ -52,7 +52,7 @@ export default function ContactForm() {
       <label>Number</label>
       <PhonebookInput
         type="tel"
-        name="phone"
+        name="number"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
